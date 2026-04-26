@@ -1,6 +1,7 @@
 """Python SDK for the SPARKIT scientific research API."""
 
 from sparkit_science._version import __version__
+from sparkit_science.async_client import AsyncSparkitClient
 from sparkit_science.client import SparkitClient
 from sparkit_science.exceptions import (
     AuthenticationError,
@@ -49,4 +50,5 @@ __all__ = [
     "TimeoutError",
     # client
     "SparkitClient",
+    "AsyncSparkitClient",
 ]
