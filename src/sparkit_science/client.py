@@ -57,7 +57,7 @@ class SparkitClient:
     def close(self) -> None:
         self._transport.close()
 
-    def __enter__(self) -> "SparkitClient":
+    def __enter__(self) -> SparkitClient:
         return self
 
     def __exit__(self, *exc: object) -> None:

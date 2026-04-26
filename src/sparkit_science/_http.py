@@ -110,7 +110,7 @@ class HttpTransport:
         if self._owns_client:
             self._client.close()
 
-    def __enter__(self) -> "HttpTransport":
+    def __enter__(self) -> HttpTransport:
         return self
 
     def __exit__(self, *exc: object) -> None:
@@ -197,7 +197,7 @@ class AsyncHttpTransport:
         if self._owns_client:
             await self._client.aclose()
 
-    async def __aenter__(self) -> "AsyncHttpTransport":
+    async def __aenter__(self) -> AsyncHttpTransport:
         return self
 
     async def __aexit__(self, *exc: object) -> None:

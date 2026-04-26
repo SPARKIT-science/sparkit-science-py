@@ -8,7 +8,7 @@ from typing import Any
 
 import httpx
 
-from sparkit_science._http import AsyncHttpTransport, DEFAULT_BASE_URL
+from sparkit_science._http import DEFAULT_BASE_URL, AsyncHttpTransport
 from sparkit_science.client import (
     _TERMINAL_STATUSES,
     _build_submit_body,
@@ -51,7 +51,7 @@ class AsyncSparkitClient:
     async def aclose(self) -> None:
         await self._transport.aclose()
 
-    async def __aenter__(self) -> "AsyncSparkitClient":
+    async def __aenter__(self) -> AsyncSparkitClient:
         return self
 
     async def __aexit__(self, *exc: object) -> None:

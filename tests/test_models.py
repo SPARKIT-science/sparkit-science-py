@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import pytest
+from pydantic import ValidationError
 
 
 def test_source_parses_full_payload() -> None:
@@ -61,7 +62,7 @@ def test_progress_phase_is_validated() -> None:
     p = Progress.model_validate({"phase": "searching"})
     assert p.phase == "searching"
 
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationError):
         Progress.model_validate({"phase": "exploding"})
 
 

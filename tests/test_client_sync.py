@@ -172,9 +172,8 @@ def test_research_raises_typed_exception_on_failed(
 
     with SparkitClient(
         api_key=api_key, base_url=base_url, poll_interval=(0.0, 0.0)
-    ) as client:
-        with pytest.raises(SafetyBlockedError) as exc_info:
-            client.research("Q")
+    ) as client, pytest.raises(SafetyBlockedError) as exc_info:
+        client.research("Q")
     assert exc_info.value.job_id == "job_01HXYZ"
 
 
@@ -191,6 +190,5 @@ def test_research_raises_cancelled_when_status_cancelled(
 
     with SparkitClient(
         api_key=api_key, base_url=base_url, poll_interval=(0.0, 0.0)
-    ) as client:
-        with pytest.raises(CancelledError):
-            client.research("Q")
+    ) as client, pytest.raises(CancelledError):
+        client.research("Q")

@@ -28,6 +28,8 @@ def test_typed_subclasses_inherit_from_base() -> None:
         RateLimitedError,
         SafetyBlockedError,
         SparkitError,
+    )
+    from sparkit_science.exceptions import (
         TimeoutError as SparkitTimeoutError,
     )
 

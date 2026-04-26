@@ -40,7 +40,7 @@ class SparkitError(Exception):
         request_id: str | None = None,
         status_code: int | None = None,
         retry_after: float | None = None,
-    ) -> "SparkitError":
+    ) -> SparkitError:
         """Build the most-specific exception type for an API error payload.
 
         Falls back to `SparkitError(code='internal_error')` if the payload
