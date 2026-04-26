@@ -66,6 +66,34 @@ def test_progress_phase_is_validated() -> None:
         Progress.model_validate({"phase": "exploding"})
 
 
+def test_progress_accepts_null_phase_for_queued_jobs() -> None:
+    """The server sends `progress: {phase: null}` for freshly-queued jobs."""
+    from sparkit_science.models import Progress
+
+    p = Progress.model_validate({"phase": None})
+    assert p.phase is None
+
+
+def test_job_with_null_progress_phase_parses() -> None:
+    """Regression: queued jobs from prod return progress.phase = null and
+    must round-trip through Job without a ValidationError."""
+    from sparkit_science.models import Job
+
+    job = Job.model_validate(
+        {
+            "job_id": "job_queued_x",
+            "status": "queued",
+            "created_at": "2026-04-26T15:00:00Z",
+            "completed_at": None,
+            "progress": {"phase": None},
+            "result": None,
+        }
+    )
+    assert job.status == "queued"
+    assert job.progress is not None
+    assert job.progress.phase is None
+
+
 def test_job_aliases_job_id_to_id(job_payload_queued: dict) -> None:
     from sparkit_science.models import Job
 

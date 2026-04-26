@@ -45,7 +45,10 @@ class Progress(BaseModel):
 
     model_config = ConfigDict(extra="ignore")
 
-    phase: Phase
+    # The server sends `phase: null` for queued jobs that haven't started
+    # the agent loop yet. Once the job is `running`, phase is one of the
+    # literal values above.
+    phase: Phase | None = None
 
 
 class Job(BaseModel):

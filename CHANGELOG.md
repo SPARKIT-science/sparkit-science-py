@@ -5,6 +5,14 @@ follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.1.1] — 2026-04-26
+
+### Fixed
+- `Progress.phase` now accepts `None` so the SDK tolerates the
+  `progress: {phase: null}` shape the server returns for freshly-queued
+  jobs. Previously `client.submit()` raised `pydantic.ValidationError`
+  on every call. Regression tests added.
+
 ## [0.1.0] — 2026-04-26
 
 ### Added
