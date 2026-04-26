@@ -25,6 +25,7 @@ from sparkit_science.models import (
     Usage,
     WebhookEvent,
 )
+from sparkit_science.webhook import verify_webhook
 
 __all__ = [
     "__version__",
@@ -51,4 +52,6 @@ __all__ = [
     # client
     "SparkitClient",
     "AsyncSparkitClient",
+    # webhook
+    "verify_webhook",
 ]
