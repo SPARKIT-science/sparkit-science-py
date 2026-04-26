@@ -8,9 +8,6 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field
 
 JobStatus = Literal["queued", "running", "completed", "failed", "cancelled"]
-Phase = Literal[
-    "routing", "searching", "reading", "thinking", "computing", "drafting"
-]
 Plan = Literal["try_it", "pro", "max", "enterprise", "none"]
 EventType = Literal[
     "research.completed", "research.failed", "research.cancelled"
@@ -40,17 +37,6 @@ class Result(BaseModel):
     sources: list[Source] = Field(default_factory=list)
 
 
-class Progress(BaseModel):
-    """Coarse-grained progress signal for an in-flight Job."""
-
-    model_config = ConfigDict(extra="ignore")
-
-    # The server sends `phase: null` for queued jobs that haven't started
-    # the agent loop yet. Once the job is `running`, phase is one of the
-    # literal values above.
-    phase: Phase | None = None
-
-
 class Job(BaseModel):
     """A research job, returned by submit/get_job/cancel_job."""
 
@@ -60,16 +46,12 @@ class Job(BaseModel):
     status: JobStatus
     created_at: datetime
     completed_at: datetime | None = None
-    progress: Progress | None = None
     result: Result | None = None
 
     def __repr__(self) -> str:
         # Deliberately omit `result` from repr — protects the proprietary
         # report contents and prevents accidental log leakage.
-        phase = self.progress.phase if self.progress else None
-        return (
-            f"Job(id={self.id!r}, status={self.status!r}, phase={phase!r})"
-        )
+        return f"Job(id={self.id!r}, status={self.status!r})"
 
 
 class Usage(BaseModel):

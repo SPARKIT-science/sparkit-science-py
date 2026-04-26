@@ -5,6 +5,21 @@ follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.1.2] — 2026-04-26
+
+### Removed
+- **`Progress` model and `Job.progress` field.** The server no longer
+  surfaces agent-loop phases (routing/searching/reading/thinking/
+  computing/drafting) — those revealed the loop's coarse shape to
+  customers. Polling clients should rely on `Job.status`
+  (`queued` / `running` / `completed` / `failed` / `cancelled`)
+  instead. `extra="ignore"` on the model means servers that still
+  include the field during the deploy window are tolerated silently.
+- **`EmbeddedCodeError` typed exception** and its mapping for the
+  server's `embedded_code` error code. The server now surfaces these
+  as `invalid_request` with a generic message; existing
+  `InvalidRequestError` covers the case.
+
 ## [0.1.1] — 2026-04-26
 
 ### Fixed

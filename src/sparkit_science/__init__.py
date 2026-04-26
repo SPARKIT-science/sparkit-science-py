@@ -7,7 +7,6 @@ from sparkit_science.exceptions import (
     AuthenticationError,
     CancelledError,
     CostCapExceededError,
-    EmbeddedCodeError,
     InternalError,
     InvalidRequestError,
     InvalidSignatureError,
@@ -19,7 +18,6 @@ from sparkit_science.exceptions import (
 )
 from sparkit_science.models import (
     Job,
-    Progress,
     Result,
     Source,
     Usage,
@@ -31,7 +29,6 @@ __all__ = [
     "__version__",
     # models
     "Job",
-    "Progress",
     "Result",
     "Source",
     "Usage",
@@ -40,7 +37,6 @@ __all__ = [
     "AuthenticationError",
     "CancelledError",
     "CostCapExceededError",
-    "EmbeddedCodeError",
     "InternalError",
     "InvalidRequestError",
     "InvalidSignatureError",

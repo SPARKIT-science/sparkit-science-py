@@ -114,10 +114,6 @@ class SafetyBlockedError(SparkitError):
     """422: query rejected by safety screening."""
 
 
-class EmbeddedCodeError(SparkitError):
-    """422: query contained embedded code, which is not permitted."""
-
-
 class TimeoutError(SparkitError):  # noqa: A001 - shadowing the builtin is intentional
     """504: the job exceeded the server-side timeout."""
 
@@ -141,7 +137,6 @@ _CODE_TO_CLASS: dict[str, type[SparkitError]] = {
     "quota_exhausted": QuotaExhaustedError,
     "cost_cap_exceeded": CostCapExceededError,
     "safety_blocked": SafetyBlockedError,
-    "embedded_code": EmbeddedCodeError,
     "timeout": TimeoutError,
     "cancelled": CancelledError,
     "internal_error": InternalError,
